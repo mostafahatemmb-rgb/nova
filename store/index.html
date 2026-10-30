@@ -45,7 +45,7 @@ footer{border-top:1px solid var(--ln);padding:2rem 5vw;color:var(--mu);display:f
 .chips{display:flex;flex-wrap:wrap;gap:.5rem;margin:.5rem 0 1.2rem}.chip{background:#000;color:#fff;border:1px solid #444;padding:.55rem 1rem;font:600 .9rem Manrope,sans-serif;cursor:pointer}.chip.on{background:#fff;color:#000;border-color:#fff}.lb{font:600 .9rem Manrope,sans-serif;color:var(--mu)}.rc{margin-top:1rem}.rc div{display:flex;justify-content:space-between;padding:.3rem 0}.rc .tot{border-top:1px solid var(--ln);margin:.5rem 0 0;padding-top:.8rem}
 .chip:disabled{color:#555;border-color:#333;text-decoration:line-through;cursor:not-allowed}.btn:disabled{opacity:.4;cursor:not-allowed}
 .lgb{background:none;color:#fff;border:1px solid #444;padding:.35rem .8rem;font:600 .85rem Manrope,sans-serif;cursor:pointer}
-.ar body,.ar h2,.ar h3,.ar p,.ar .btn,.ar button,.ar input,.ar select,.ar textarea,.ar .chip,.ar .cats a,.ar .off,.ar .lgb{font-family:Cairo,system-ui,sans-serif}
+.lang-ar body,.lang-ar h2,.lang-ar h3,.lang-ar p,.lang-ar .btn,.lang-ar button,.lang-ar input,.lang-ar select,.lang-ar textarea,.lang-ar .chip,.lang-ar .cats a,.lang-ar .off,.lang-ar .lgb{font-family:Cairo,system-ui,sans-serif}
 </style></head><body>
 <header><a class="logo" href="#home">NOVA</a><nav id="nav"></nav><button class="lgb" id="lgb"></button></header>
 <main id="app"></main>
@@ -64,7 +64,7 @@ for(const a of["placeholder","aria-label","title"])if(n.hasAttribute(a)){const v
 n.childNodes.forEach(trNode)}
 function setLang(l){try{localStorage.setItem("nv_lang",l)}catch(e){}location.reload()}
 (function(){const b=document.getElementById("lgb");if(b){b.textContent=LG=="ar"?"English":"العربية";b.onclick=()=>setLang(LG=="ar"?"en":"ar")}
-if(LG=="ar"){const h=document.documentElement;h.dir="rtl";h.lang="ar";h.classList.add("ar");trNode(document.body);new MutationObserver(ms=>ms.forEach(m=>m.addedNodes.forEach(trNode))).observe(document.body,{childList:true,subtree:true})}
+if(LG=="ar"){const h=document.documentElement;h.dir="rtl";h.lang="ar";h.classList.add("lang-ar");trNode(document.body);new MutationObserver(ms=>ms.forEach(m=>m.addedNodes.forEach(trNode))).observe(document.body,{childList:true,subtree:true})}
 if(!LG){const m=document.createElement("div");m.setAttribute("data-nt","1");m.style.cssText="position:fixed;inset:0;background:#000;z-index:100;display:grid;place-items:center;text-align:center;padding:1rem";
 m.innerHTML=`<div><div style="font:800 2.2rem Syne,Impact,sans-serif;letter-spacing:.3em;margin-bottom:2.5rem">NOVA</div><p style="color:#9b9b9b;margin-bottom:1.5rem">Choose your language · اختر لغتك</p><div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap"><button class="btn" onclick="setLang('en')">English</button><button class="btn" onclick="setLang('ar')" style="font-family:Cairo,system-ui,sans-serif">العربية</button></div></div>`;document.body.appendChild(m)}})();
 const DEF=[

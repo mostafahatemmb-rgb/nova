@@ -11,6 +11,8 @@ if(op==="img"){const d=b.d;if(typeof d!=="string"||!/^data:image\/jpeg;base64,/.
 const x=await fetch(B,{method:"POST",headers:{...H,"X-Bin-Private":"true","X-Bin-Name":"nova-photo"},body:JSON.stringify({d})});
 if(!x.ok)return res.status(502).json({error:"photo storage refused: "+(await x.text()).slice(0,120)});
 const j=await x.json();return res.json({id:j.metadata.id})}
+if(op==="blob"){const d=b.d;if(typeof d!=="string"||!/^data:image\/jpeg;base64,/.test(d)||d.length>4e6)return res.status(400).json({error:"bad image"});
+const{put}=require("@vercel/blob");const o=await put("nova/photo.jpg",Buffer.from(d.split(",")[1],"base64"),{access:"public",contentType:"image/jpeg",addRandomSuffix:true});return res.json({url:o.url})}
 if(op==="cfg"){const r=await rec();for(const k of["products","categories","offers","settings"])if(Array.isArray(b[k]))r[k]=b[k];const x=await put(r);return res.status(x.ok?200:502).json({ok:x.ok})}
 if(op==="addOrder"){const r=await rec();r.orders=r.orders||[];if(b.order)r.orders.push(b.order);const x=await put(r);return res.status(x.ok?200:502).json({ok:x.ok})}
 if(op==="delOrder"){const r=await rec();r.orders=(r.orders||[]).filter(o=>o.id!==b.id);const x=await put(r);return res.status(x.ok?200:502).json({ok:x.ok})}

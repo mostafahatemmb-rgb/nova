@@ -46,7 +46,7 @@ footer{border-top:1px solid var(--ln);padding:2rem 5vw;color:var(--mu);display:f
 .chips{display:flex;flex-wrap:wrap;gap:.5rem;margin:.5rem 0 1.2rem}.chip{background:#000;color:#fff;border:1px solid #444;padding:.55rem 1rem;font:600 .9rem Manrope,sans-serif;cursor:pointer}.chip.on{background:#fff;color:#000;border-color:#fff}.lb{font:600 .9rem Manrope,sans-serif;color:var(--mu)}.rc{margin-top:1rem}.rc div{display:flex;justify-content:space-between;padding:.3rem 0}.rc .tot{border-top:1px solid var(--ln);margin:.5rem 0 0;padding-top:.8rem}
 .chip:disabled{color:#555;border-color:#333;text-decoration:line-through;cursor:not-allowed}.btn:disabled{opacity:.4;cursor:not-allowed}
 .lgb{background:none;color:#fff;border:1px solid #444;padding:.35rem .8rem;font:600 .85rem Manrope,sans-serif;cursor:pointer}
-.ar body,.ar h2,.ar h3,.ar p,.ar .btn,.ar button,.ar input,.ar select,.ar textarea,.ar .chip,.ar .cats a,.ar .off,.ar .lgb{font-family:Cairo,system-ui,sans-serif}
+.rtl body,.rtl h2,.rtl h3,.rtl p,.rtl .btn,.rtl button,.rtl input,.rtl select,.rtl textarea,.rtl .chip,.rtl .cats a,.rtl .off,.rtl .lgb{font-family:Cairo,system-ui,sans-serif}
 </style></head><body>
 <header><a class="logo" href="#home">NOVA</a><nav id="nav"></nav><button class="lgb" id="lgb"></button></header>
 <main id="app"></main>
@@ -65,7 +65,7 @@ for(const a of["placeholder","aria-label","title"])if(n.hasAttribute(a)){const v
 n.childNodes.forEach(trNode)}
 function setLang(l){try{localStorage.setItem("nv_lang",l)}catch(e){}location.reload()}
 (function(){const b=document.getElementById("lgb");if(b){b.textContent=LG=="ar"?"English":"العربية";b.onclick=()=>setLang(LG=="ar"?"en":"ar")}
-if(LG=="ar"){const h=document.documentElement;h.dir="rtl";h.lang="ar";h.classList.add("ar");trNode(document.body);new MutationObserver(ms=>ms.forEach(m=>m.addedNodes.forEach(trNode))).observe(document.body,{childList:true,subtree:true})}
+if(LG=="ar"){const h=document.documentElement;h.dir="rtl";h.lang="ar";h.classList.add("rtl");trNode(document.body);new MutationObserver(ms=>ms.forEach(m=>m.addedNodes.forEach(trNode))).observe(document.body,{childList:true,subtree:true})}
 if(!LG){const m=document.createElement("div");m.setAttribute("data-nt","1");m.style.cssText="position:fixed;inset:0;background:#000;z-index:100;display:grid;place-items:center;text-align:center;padding:1rem";
 m.innerHTML=`<div><div style="font:800 2.2rem Syne,Impact,sans-serif;letter-spacing:.3em;margin-bottom:2.5rem">NOVA</div><p style="color:#9b9b9b;margin-bottom:1.5rem">Choose your language · اختر لغتك</p><div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap"><button class="btn" onclick="setLang('en')">English</button><button class="btn" onclick="setLang('ar')" style="font-family:Cairo,system-ui,sans-serif">العربية</button></div></div>`;document.body.appendChild(m)}})();
 const DEF=[
@@ -87,7 +87,7 @@ const card=p=>`<a class="card" href="#product-${p.id}" style="text-decoration:no
 function add(id){const p=P.find(x=>x.id==id),c=document.querySelector("#cc .on"),z=document.querySelector("#cs .on"),s=z?z.textContent:"",k=c?c.textContent:"",i=C.find(x=>x.id==id&&x.size==s&&x.color==k);
 i?i.q++:C.push({id:p.id,name:p.name,price:p.sale||p.price,img:p.img||"",cat:p.cat||"",size:s,color:k,q:1});sv("nv_c",C);nav();toast("Added to cart")}
 function nav(){const h=location.hash.slice(1)||"home";$("#nav").innerHTML=[["home","Home"],["shop","Shop"],["cart","Cart ("+cnt()+")"]].map(([k,l])=>`<a href="#${k}" class="${h==k?"on":""}">${l}</a>`).join("")}
-function home(){const pics=P.filter(p=>p.img),b=pics.length?pics[Math.floor(Math.random()*pics.length)].img:"";return`<section class="hero"${b?` style="background:linear-gradient(90deg,#000 15%,rgba(0,0,0,.45)),url('${b}') center/cover"`:""}>${offersBar()}<span class="logo">NOVA</span><p>Clean black essentials for men. Made to look expensive, priced to wear every day.</p><a class="btn" href="#shop">Shop now</a></section>
+function home(){const pics=P.filter(p=>p.img),b=pics.length?pics[Math.floor(Math.random()*pics.length)].img:"";return`<section class="hero"${b?` style="background:linear-gradient(${LG=="ar"?270:90}deg,#000 15%,rgba(0,0,0,.45)),url('${b}') center/cover"`:""}>${offersBar()}<span class="logo">NOVA</span><p>Clean black essentials for men. Made to look expensive, priced to wear every day.</p><a class="btn" href="#shop">Shop now</a></section>
 <div class="cats"><a href="#shop">T-shirts and polos</a><a href="#shop">Shirts and chinos</a><a href="#shop">Jackets and hoodies</a></div>
 <section class="w"><div class="hd"><h2>New in</h2><a href="#shop">View all</a></div><div class="g">${P.slice(-4).reverse().map(card).join("")}</div></section>`}
 const shop=()=>`<section class="w"><div class="hd"><h2>Shop all</h2><span>${P.length} items</span></div><div class="g">${[...P].reverse().map(card).join("")}</div></section>`;
